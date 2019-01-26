@@ -1,7 +1,7 @@
 package PO61.Matyakubov.wdad.learn.rmi.server;
 
-import PO61.Matyakubov.wdad.learn.xml.managers.PreferencesManager;
 import PO61.Matyakubov.wdad.utils.PreferencesManagerConstants;
+import PO61.Matyakubov.wdad.data.managers.PreferencesManager;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Server {
 
-    private static final String BIND_NAME = "XmlDataManager";
+    private static final String BIND_NAME = "DataManager";
     private static int port;
     private static String address;
     private static ShutdownHook shutdownHook;
@@ -39,14 +39,14 @@ public class Server {
                 System.out.println(" OK");
             }
 
-            final XmlDataManagerImpl service = new XmlDataManagerImpl();
+            final DataManagerImpl service = new DataManagerImpl();
             UnicastRemoteObject.exportObject(service, 0);
 
             System.out.print("Binding service...");
             registry.bind(BIND_NAME, service);
             System.out.println(" OK");
 
-            pm.addBindedObject(BIND_NAME,"XmlDataManager");
+            pm.addBindedObject(BIND_NAME,"DataManager");
 
             System.out.println("Server working...");
 
